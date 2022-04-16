@@ -72,7 +72,7 @@ class Loop:
                                           file=file,
                                           username=f'{profile.full_name} ({profile.username})'
                                           if profile.full_name != profile.username
-                                          else f'[Instagram] {profile.full_name}',
+                                          else f'{profile.full_name}',
                                           avatar_url=profile.profile_pic_url)
                     DB(readonly=False).insert(
                         storyItem.owner_id, storyItem.mediaid)
