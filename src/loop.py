@@ -3,7 +3,7 @@ import requests
 from typing import Any
 from urllib.parse import urlparse
 from tempfile import NamedTemporaryFile
-from dhooks import Webhook, File, Embed
+from dhooks import Webhook, File
 from instaloader import Post
 from instaloader.structures import PostSidecarNode, StoryItem
 
@@ -41,24 +41,6 @@ class Loop:
                                       if profile.full_name != profile.username
                                       else f'{profile.full_name}',
                                       avatar_url=profile.profile_pic_url)
-
-                    embed = Embed(description='This is the **description** of the embed! :smiley:',
-                                    color=0x5CDBF0,
-                                    timestamp='now'  # sets the timestamp to current time)
-
-                    image1 = 'https://i.imgur.com/rdm3W9t.png'
-                    image2 = 'https://i.imgur.com/f1LOr4q.png'
-
-                    embed.set_author(name='Author Goes Here', icon_url=image1)
-                    embed.add_field(name='Test Field', value='Value of the field :open_mouth:')
-                    embed.add_field(name='Another Field', value='1234 :smile:')
-                    embed.set_footer(text='Here is my footer text', icon_url=image1)
-
-                    embed.set_thumbnail(image1)
-                    embed.set_image(image2)
-
-                    self.webhook.send(embed=embed)
-
                 if post.typename == 'GraphSidecar' and post.mediacount > 1:
                     postSidecarNode = post.get_sidecar_nodes(1)
                     node = next(postSidecarNode, None)
@@ -66,23 +48,6 @@ class Loop:
                         with NamedTemporaryFile() as temp:
                             file = self.__create_File(node, temp)
                             self.webhook.send(file=file)
-                            embed = Embed(description='This is the **description** of the embed! :smiley:',
-                                            color=0x5CDBF0,
-                                            timestamp='now'  # sets the timestamp to current time)
-
-                            image1 = 'https://i.imgur.com/rdm3W9t.png'
-                            image2 = 'https://i.imgur.com/f1LOr4q.png'
-
-                            embed.set_author(name='Author Goes Here', icon_url=image1)
-                            embed.add_field(name='Test Field', value='Value of the field :open_mouth:')
-                            embed.add_field(name='Another Field', value='1234 :smile:')
-                            embed.set_footer(text='Here is my footer text', icon_url=image1)
-
-                            embed.set_thumbnail(image1)
-                            embed.set_image(image2)
-
-                            self.webhook.send(embed=embed)
-                                          
                         node = next(postSidecarNode, None)
                 DB(readonly=False).insert(post.owner_id, post.mediaid)
                 post = next(posts, None)
@@ -109,25 +74,6 @@ class Loop:
                                           if profile.full_name != profile.username
                                           else f'{profile.full_name}',
                                           avatar_url=profile.profile_pic_url)
-
-                        embed = Embed(description='This is the **description** of the embed! :smiley:',
-                                        color=0x5CDBF0,
-                                        timestamp='now'  # sets the timestamp to current time)
-
-                        image1 = 'https://i.imgur.com/rdm3W9t.png'
-                        image2 = 'https://i.imgur.com/f1LOr4q.png'
-
-                        embed.set_author(name='Author Goes Here', icon_url=image1)
-                        embed.add_field(name='Test Field', value='Value of the field :open_mouth:')
-                        embed.add_field(name='Another Field', value='1234 :smile:')
-                        embed.set_footer(text='Here is my footer text', icon_url=image1)
-
-                        embed.set_thumbnail(image1)
-                        embed.set_image(image2)
-
-                        self.webhook.send(embed=embed)
-                                          
-                                          
                     DB(readonly=False).insert(
                         storyItem.owner_id, storyItem.mediaid)
                     storyItem = next(storyItems, None)
