@@ -37,9 +37,9 @@ class Loop:
                                       if self.content != ''
                                       else f'{post.caption}\nhttps://www.instagram.com/p/{post.shortcode}',
                                       file=file,
-                                      username=f'[Instagram] {profile.full_name} ({profile.username})'
+                                      username=f'{profile.full_name} ({profile.username})'
                                       if profile.full_name != profile.username
-                                      else f'[Instagram] {profile.full_name}',
+                                      else f'{profile.full_name}',
                                       avatar_url=profile.profile_pic_url)
                 if post.typename == 'GraphSidecar' and post.mediacount > 1:
                     postSidecarNode = post.get_sidecar_nodes(1)
