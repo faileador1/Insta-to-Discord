@@ -7,8 +7,8 @@
 			"label": "docker-run: debug",
 			"dependsOn": ["docker-build"],
 			"dockerRun": {
-				"containerName": "docker-instagram-to-discord",
-				"image": "docker-instagram-to-discord:dev",
+				"containerName": "insta-to-discord",
+				"image": "insta-to-discord:dev",
 				"volumes": [{
 					"containerPath": "/usr/src/app",
 					"localPath": "${workspaceFolder}",
@@ -24,7 +24,7 @@
 			"dockerBuild": {
 				"context": "${workspaceFolder}",
 				"dockerfile": "${workspaceFolder}/Dockerfile",
-				"tag": "docker-instagram-to-discord:dev"
+				"tag": "insta-to-discord:dev"
 			}
 		}
 	]
